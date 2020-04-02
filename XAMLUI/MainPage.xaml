@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:XAMLUI.ViewModels"
+             mc:Ignorable="d"
+             x:Class="XAMLUI.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="output-onlinepngtools" BackgroundColor="AliceBlue" Grid.Column="0" Grid.Row="0"
+               Grid.ColumnSpan="2"/>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="ToDo App" FontSize="Title"/>
+
+        <Editor Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+                Placeholder="Enter Note here Beautiful" Margin="10,10"
+                Text="{Binding TheNote}"/>
+
+        <Button Grid.Row="2" Grid.Column="0" Text="Save" Margin="10,10"
+                Command="{Binding SaveCommand}" BackgroundColor="BlueViolet"/>
+
+        <Button Grid.Row="2" Grid.Column="1" Text="Erase" Margin="10,10"
+                Command="{Binding EraseCommand}" BackgroundColor="Red"/>
+
+        <CollectionView ItemsSource="{Binding AllNotes}" Grid.Row="3" Grid.ColumnSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame>
+                            <Label Text="{Binding .}" FontSize="Title"/>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </Grid>
+</ContentPage>
